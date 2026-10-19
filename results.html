@@ -91,6 +91,7 @@
       <button id="refresh">🔄 重新整理</button>
       <button id="showUrl">🔗 顯示學生填寫網址</button>
       <span class="spacer"></span>
+      <span id="status" class="msg"></span>
       <span id="who"></span>
       <button class="danger" id="clear">🗑 清除所有資料</button>
     </div>
@@ -174,7 +175,7 @@ $("refresh").onclick = async () => {
     const snap = await getDocs(respCol);
     update(snap.docs.map((d) => d.data()));
     listen(); // 順便重新接上即時更新
-  } catch (e) { alert("重新整理失敗：" + e.message); }
+  } catch (e) { $("status").textContent = "重新整理失敗：" + e.message; }
 };
 
 // ---- 畫圖 ----
@@ -256,9 +257,9 @@ $("clear").onclick = async () => {
     const cfg = await getDoc(cfgRef);
     const round = (cfg.exists() && Number.isInteger(cfg.data().round) ? cfg.data().round : 1) + 1;
     await setDoc(cfgRef, { round });
-    alert(`已清除 ${snap.docs.length} 份答卷。`);
+    $("status").textContent = `已清除 ${snap.docs.length} 份答卷。`;
   } catch (e) {
-    alert("清除失敗：" + e.message);
+    $("status").textContent = "清除失敗：" + e.message;
   } finally {
     btn.disabled = false; btn.textContent = "🗑 清除所有資料";
   }
