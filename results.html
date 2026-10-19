@@ -14,7 +14,7 @@
   button { font:inherit; cursor:pointer; }
   [hidden] { display:none !important; }
 
-  .counts { display:grid; grid-template-columns:repeat(4,1fr); gap:clamp(8px,1vw,16px); margin-bottom:clamp(14px,2vw,28px); }
+  .counts { display:grid; grid-template-columns:repeat(3,1fr); gap:clamp(8px,1vw,16px); margin-bottom:clamp(14px,2vw,28px); }
   .count { background:var(--panel); border-radius:14px; padding:clamp(8px,1vw,16px); text-align:center; }
   .count .k { font-size:clamp(18px,1.8vw,30px); font-weight:700; color:var(--sub); }
   .count .v { font-size:clamp(40px,5vw,84px); font-weight:800; line-height:1.1; }
@@ -74,7 +74,6 @@
     <div class="counts">
       <div class="count m"><div class="k">男生</div><div class="v" id="cm">0</div></div>
       <div class="count f"><div class="k">女生</div><div class="v" id="cf">0</div></div>
-      <div class="count n"><div class="k">不想回答</div><div class="v" id="cn">0</div></div>
       <div class="count all"><div class="k">總計</div><div class="v" id="call">0</div></div>
     </div>
 
@@ -85,7 +84,7 @@
     </div>
 
     <div class="chart" id="chart"></div>
-    <p class="foot">百分比 ＝ 勾選這一項的人數 ÷ 這一組填答總人數（複選題，加起來會超過 100%）。「全體」包含選「不想回答」的同學。<span id="updated"></span></p>
+    <p class="foot">百分比 ＝ 勾選這一項的人數 ÷ 這一組填答總人數（複選題，加起來會超過 100%）。<span id="updated"></span></p>
 
     <div class="toolbar">
       <button id="refresh">🔄 重新整理</button>
@@ -181,7 +180,7 @@ $("refresh").onclick = async () => {
 // ---- 畫圖 ----
 function render() {
   const c = stats.counts;
-  $("cm").textContent = c.m; $("cf").textContent = c.f; $("cn").textContent = c.n; $("call").textContent = c.all;
+  $("cm").textContent = c.m; $("cf").textContent = c.f; $("call").textContent = c.all;
   document.querySelectorAll(".tab").forEach((b) => b.classList.toggle("on", b.dataset.g === current));
   const list = stats.groups[current];
   const total = current === "all" ? c.all : c[current];

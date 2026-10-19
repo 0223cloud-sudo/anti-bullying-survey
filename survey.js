@@ -14,7 +14,6 @@ export const SURVEY_ID = "antibully";
 export const GENDERS = [
   { key: "m", label: "男生" },
   { key: "f", label: "女生" },
-  { key: "n", label: "不想回答" },
 ];
 
 export const ITEMS = [
