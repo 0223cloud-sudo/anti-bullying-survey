@@ -72,7 +72,7 @@
 <script type="module">
 import { signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 import { doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-import { auth, db, SURVEY_ID, GENDERS, ITEMS, esc } from "./survey.js";
+import { auth, db, SURVEY_ID, GENDERS, ITEMS, esc } from "./survey.js?v=4";
 
 const $ = (id) => document.getElementById(id);
 const DONE_KEY = "survey_done_" + SURVEY_ID;

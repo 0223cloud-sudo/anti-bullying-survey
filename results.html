@@ -117,7 +117,7 @@
 <script type="module">
 import { GoogleAuthProvider, signInWithPopup, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 import { doc, getDoc, setDoc, collection, getDocs, onSnapshot, writeBatch } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-import { auth, db, SURVEY_ID, isTeacher, computeStats, topFive, esc } from "./survey.js";
+import { auth, db, SURVEY_ID, isTeacher, computeStats, topFive, esc } from "./survey.js?v=4";
 
 const $ = (id) => document.getElementById(id);
 const cfgRef = doc(db, "surveys", SURVEY_ID);
