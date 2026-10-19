@@ -7,7 +7,7 @@ service cloud.firestore {
     function isTeacher() {
       return signedIn()
         && request.auth.token.email_verified == true
-        && request.auth.token.email in ['0223cloud@gmail.com'];
+        && request.auth.token.email in ['0223cloud@gmail.com', 'hs483441@sljh.hcc.edu.tw'];
     }
 
     // 學生匿名登入，每台裝置只能交一份，只有老師能看結果

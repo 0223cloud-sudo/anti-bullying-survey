@@ -10,4 +10,4 @@ export const firebaseConfig = {
 };
 
 // 可以看結果頁的 Google 帳號（要和 firestore.rules 裡的名單一致）
-export const TEACHER_EMAILS = ["0223cloud@gmail.com"];
+export const TEACHER_EMAILS = ["0223cloud@gmail.com", "hs483441@sljh.hcc.edu.tw"];
