@@ -37,6 +37,7 @@
   .pct small { font-weight:600; font-size:.6em; margin-left:.4em; }
   .pct.in { color:#fff; } .pct.out { color:var(--ink); }
   .tie { color:var(--sub); font-size:.55em; font-weight:700; margin-left:.3em; white-space:nowrap; }
+  .more { font-size:clamp(16px,1.6vw,26px); color:var(--sub); margin:0 0 0 clamp(48px,5vw,88px); }
   .empty { font-size:clamp(32px,4vw,64px); font-weight:800; color:var(--sub); text-align:center; padding:12vh 0; }
   .foot { color:var(--sub); font-size:clamp(14px,1.2vw,20px); margin-top:10px; }
 
@@ -190,14 +191,16 @@ function render() {
   const list = stats.groups[current];
   const total = current === "all" ? c.all : c[current];
   let html = `<h2>${TITLES[current]} <small>（共 ${total} 人）</small></h2>`;
-  const top = topFive(list);
+  const tiedAll = topFive(list);
+  const top = tiedAll.slice(0, 5); // 投影最多 5 行，避免 iPad 畫面要捲動
+  const extra = tiedAll.slice(5);
   if (!total || !top.length) {
     html += `<div class="empty">尚無資料</div>`;
   } else {
     let rank = 0, prev = null;
     top.forEach((x, i) => {
       if (x.count !== prev) { rank = i + 1; prev = x.count; }
-      const tied = top.filter((y) => y.count === x.count).length > 1;
+      const tied = tiedAll.filter((y) => y.count === x.count).length > 1;
       const inside = x.pct >= 45; // 長條夠長時字放在裡面
       html += `<div class="row">
         <div class="rank">${rank}</div>
@@ -208,6 +211,9 @@ function render() {
         </div>
       </div>`;
     });
+    if (extra.length) {
+      html += `<p class="more">另有 ${extra.length} 項也是 ${extra[0].pct}%：${extra.map((x) => esc(x.label)).join("、")}</p>`;
+    }
   }
   $("chart").innerHTML = html;
 }
